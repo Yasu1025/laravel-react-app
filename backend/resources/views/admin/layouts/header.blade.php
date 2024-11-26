@@ -9,7 +9,7 @@
       <span class="ml-3 text-xl">T-shirts admin</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900">Link1</a>
+      <a href="{{ route('admin.colors.index') }}" class="mr-5 hover:text-gray-900">Colors</a>
       <a class="mr-5 hover:text-gray-900">Link2</a>
     </nav>
     <form method="POST" action="{{ route('admin.logout') }}">
