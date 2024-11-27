@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddSizeRequest;
 use App\Http\Requests\UpdateSizeRequest;
 use App\Models\size;
-use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
 use App\Models\coupon;
-use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
