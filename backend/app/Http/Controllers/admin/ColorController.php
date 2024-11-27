@@ -52,7 +52,7 @@ class ColorController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(color $color)
+  public function edit(Color $color)
   {
     return view('admin.colors.edit')->with([
       'color' => $color
@@ -62,7 +62,7 @@ class ColorController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateColorRequest $request, color $color)
+  public function update(UpdateColorRequest $request, Color $color)
   {
     if ($request->validated()) {
       $color->update($request->validated());
@@ -75,7 +75,7 @@ class ColorController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(color $color)
+  public function destroy(Color $color)
   {
     $color->delete();
     return redirect()->route('admin.colors.index')->with([
