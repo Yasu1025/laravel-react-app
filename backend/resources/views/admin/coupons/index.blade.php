@@ -1,20 +1,20 @@
 @extends('admin.layouts.app')
 @section('title')
-  Sizes
+  Coupons
 @endsection
 
 @section('content')
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-6">
-        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Sizes({{ $sizes->count() }})</h1>
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Coupons({{ $coupons->count() }})</h1>
       </div>
       <div class="lg:w-2/3 w-full mx-auto overflow-auto">
         <div class="flex ml-auto">
-          <a href="{{ route('admin.sizes.create') }}"
+          <a href="{{ route('admin.coupons.create') }}"
             class="ml-auto mb-4 text-white bg-indigo-400 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">+
             Create
-            New Size</a>
+            New Coupon</a>
         </div>
         <table class="table-auto w-full text-left whitespace-no-wrap">
           <thead>
@@ -22,7 +22,16 @@
               <th
                 class="w-10 px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
               </th>
-              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Name</th>
+              <th class="w-64 px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Name
+              </th>
+              <th
+                class="w-16 px-4 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                Discount($)
+              </th>
+              <th
+                class="px-4 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                Validity
+              </th>
               <th
                 class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
               </th>
@@ -32,12 +41,22 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($sizes as $key => $s)
+            @foreach ($coupons as $key => $c)
               <tr>
                 <td class="px-4 py-3">{{ $key + 1 }}</td>
-                <td class="px-4 py-3">{{ $s->name }}</td>
+                <td class="px-4 py-3">{{ $c->name }}</td>
+                <td class="px-4 py-3">{{ $c->discount }}</td>
+                <td class="px-4 py-3 {{ $c->checkIfValid() ? 'text-green-500' : 'text-red-500' }} font-bold">
+                  @if ($c->checkIfValid())
+                    <span class="mr-1">Valid Until </span>
+                    {{ \Carbon\Carbon::parse($c->valid_until)->diffForHumans() }}
+                  @else
+                    <span class="mr-1">Expired At {{ \Carbon\Carbon::parse($c->valid_until)->format('Y/m/d H:m') }}
+                    </span>
+                  @endif
+                </td>
                 <td class="w-10 text-center">
-                  <a href="{{ route('admin.sizes.edit', $s->id) }}"
+                  <a href="{{ route('admin.coupons.edit', $c->id) }}"
                     class="flex text-white bg-indigo-400 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-pencil" viewBox="0 0 16 16">
@@ -47,7 +66,8 @@
                   </a>
                 </td>
                 <td class="w-10 text-center">
-                  <form id="{{ 'size-' . $s->id }}" method="POST" action="{{ route('admin.sizes.destroy', $s->id) }}">
+                  <form id="{{ 'color-' . $c->id }}" method="POST"
+                    action="{{ route('admin.coupons.destroy', $c->id) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
