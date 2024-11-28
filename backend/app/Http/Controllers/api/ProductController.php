@@ -9,7 +9,7 @@ use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
-class ProductApiController extends Controller
+class ProductController extends Controller
 {
   // Get all the products
   public function index()

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\ProductApiController;
+use App\Http\Controllers\api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 
-Route::get('products', [ProductApiController::class, 'index']);
-Route::get('products/{color}/color', [ProductApiController::class, 'filterProductByColor']);
-Route::get('products/{size}/size', [ProductApiController::class, 'filterProductBySize']);
-Route::get('products/{searchTerm}/find', [ProductApiController::class, 'findProductByTerm']);
-Route::get('products/{product}/show', [ProductApiController::class, 'show']);
+Route::get('products', [ProductController::class, 'index']);
+Route::get('products/{color}/color', [ProductController::class, 'filterProductByColor']);
+Route::get('products/{size}/size', [ProductController::class, 'filterProductBySize']);
+Route::get('products/{searchTerm}/find', [ProductController::class, 'findProductByTerm']);
+Route::get('products/{product}/show', [ProductController::class, 'show']);
