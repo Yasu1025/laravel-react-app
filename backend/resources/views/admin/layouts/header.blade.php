@@ -12,6 +12,7 @@
       <a href="{{ route('admin.colors.index') }}" class="mr-5 hover:text-gray-900">Colors</a>
       <a href="{{ route('admin.sizes.index') }}" class="mr-5 hover:text-gray-900">Sizes</a>
       <a href="{{ route('admin.coupons.index') }}" class="mr-5 hover:text-gray-900">Coupons</a>
+      <a href="{{ route('admin.products.index') }}" class="mr-5 hover:text-gray-900">Products</a>
     </nav>
     <form method="POST" action="{{ route('admin.logout') }}">
       @csrf
