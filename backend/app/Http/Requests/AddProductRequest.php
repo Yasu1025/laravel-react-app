@@ -28,10 +28,10 @@ class AddProductRequest extends FormRequest
       'color_id' => 'required',
       'size_id' => 'required',
       'desc' => 'required|max:2000',
-      'thumbnail' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-      'first_image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-      'second_image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-      'third_image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+      'thumbnail' => 'image|mimes:png,jpg,jpeg|max:2048',
+      'first_image' => 'image|mimes:png,jpg,jpeg|max:2048',
+      'second_image' => 'image|mimes:png,jpg,jpeg|max:2048',
+      'third_image' => 'image|mimes:png,jpg,jpeg|max:2048',
     ];
   }
 
