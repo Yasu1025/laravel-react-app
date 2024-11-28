@@ -100,6 +100,7 @@ class ProductController extends Controller
       }
 
       $data['slug'] = Str::slug($request->name);
+      $data['status'] = $request->status;
 
       $product->update($data);
       // For intermediate table

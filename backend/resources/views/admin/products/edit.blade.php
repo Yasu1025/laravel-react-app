@@ -14,6 +14,18 @@
           @csrf
           @method('PUT')
           <div class="w-96 mx-auto">
+            <div class="flex items-center mb-4">
+              <input id="status-1" type="radio" value="1" name="status" @checked($product->status)
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="status-1" class="ms-2 text-sm font-medium text-gray-900">
+                In Stock</label>
+            </div>
+            <div class="flex items-center">
+              <input id="status-2" type="radio" value="0" name="status" @checked(!$product->status)
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="status-2" class="ms-2 text-sm font-medium text-gray-900">
+                Out of Stock</label>
+            </div>
             <div class="pb-4">
               <div class="relative">
                 <label for="name" class="leading-7 text-sm text-gray-600">name</label>
