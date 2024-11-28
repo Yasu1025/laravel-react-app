@@ -10,20 +10,16 @@ export interface IProduct {
   second_image?: string;
   third_image?: string;
   status: boolean;
-  created_at: string;
-  updated_at: string;
+  colors: IColor[];
+  sizes: ISize[];
 }
 
 export interface IColor {
   id: number;
   name: string;
-  created_at: string;
-  updated_at: string;
 }
 
 export interface ISize {
   id: number;
   name: string;
-  created_at: string;
-  updated_at: string;
 }

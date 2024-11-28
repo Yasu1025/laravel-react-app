@@ -7,9 +7,11 @@ interface Props {
 
 const ProductList = ({ products }: Props): JSX.Element => {
   return (
-    <div>
+    <div className="flex flex-wrap -m-4">
       {products.length ? (
-        products.map((product) => <ProductItem product={product} />)
+        products.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))
       ) : (
         <div>No products......</div>
       )}
