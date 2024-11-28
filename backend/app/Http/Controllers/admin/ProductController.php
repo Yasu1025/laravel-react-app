@@ -43,16 +43,6 @@ class ProductController extends Controller
   {
     if ($request->validated()) {
       $data = $request->all();
-      // $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
-      // if ($request->has('first_image')) {
-      //   $data['first_image'] = $this->saveImage($request->file('first_image'));
-      // }
-      // if ($request->has('second_image')) {
-      //   $data['second_image'] = $this->saveImage($request->file('second_image'));
-      // }
-      // if ($request->has('third_image')) {
-      //   $data['third_image'] = $this->saveImage($request->file('third_image'));
-      // }
       $image_keys = ['thumbnail', 'first_image', 'second_image', 'third_image'];
       foreach ($image_keys as $image_key) {
         if ($request->has($image_key)) {
@@ -90,7 +80,7 @@ class ProductController extends Controller
     return view('admin.products.edit')->with([
       'product' => $product,
       'colors' => $colors,
-      'product' => $product,
+      'sizes' => $sizes,
     ]);
   }
 
@@ -101,20 +91,10 @@ class ProductController extends Controller
   {
     if ($request->validated()) {
       $data = $request->all();
-      // $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
-      // if ($request->has('first_image')) {
-      //   $data['first_image'] = $this->saveImage($request->file('first_image'));
-      // }
-      // if ($request->has('second_image')) {
-      //   $data['second_image'] = $this->saveImage($request->file('second_image'));
-      // }
-      // if ($request->has('third_image')) {
-      //   $data['third_image'] = $this->saveImage($request->file('third_image'));
-      // }
       $image_keys = ['thumbnail', 'first_image', 'second_image', 'third_image'];
       foreach ($image_keys as $image_key) {
         if ($request->has($image_key)) {
-          $this->removeImageFromStorage($request->file($image_key));
+          $this->removeImageFromStorage($product->$image_key);
           $data[$image_key] = $this->saveImage($request->file($image_key));
         }
       }
@@ -150,14 +130,14 @@ class ProductController extends Controller
   // private ------------------------------------
   private function saveImage($file): string
   {
-    $image_name = time() . '_' . $file->getClientOriginalName;
+    $image_name = time() . '_' . $file->getClientOriginalName();
     $file->storeAs('images/products/', $image_name, 'public');
     return 'storage/images/products/' . $image_name;
   }
 
   private function removeImageFromStorage($file)
   {
-    $path = public_path('storage/images/products/' . $file);
+    $path = public_path($file);
     if (File::exists($path)) {
       File::delete($path);
     }
