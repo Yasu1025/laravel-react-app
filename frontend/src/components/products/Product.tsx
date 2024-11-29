@@ -5,8 +5,11 @@ import apiClient from "../../api/client";
 import Spinner from "../layouts/Spinner";
 import AlertMessage from "../layouts/Alert";
 import Slider from "./images/Slider";
+import { addToCart } from "../../redux/store/slices/cartSlices";
+import { useAppDispatch } from "../../redux/store/hooks";
 
 const Product = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [product, setProduct] = useState<IProduct | null>(null);
   const [selectedColor, setSelectedColor] = useState<IColor | null>(null);
   const [selectedSize, setSelectedSize] = useState<ISize | null>(null);
@@ -28,6 +31,19 @@ const Product = (): JSX.Element => {
     };
     fetchProductBySlug();
   }, [slug]);
+
+  const makeUniqueId = (length: number): string => {
+    let result = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  };
 
   return (
     <div>
@@ -104,6 +120,26 @@ const Product = (): JSX.Element => {
                     ${product.price}
                   </span>
                   <button
+                    onClick={() => {
+                      dispatch(
+                        addToCart({
+                          product_id: product.id,
+                          ref: makeUniqueId(10),
+                          name: product.name,
+                          slug: product.slug,
+                          qty: qty,
+                          price: product.price,
+                          color: selectedColor?.name,
+                          size: selectedSize?.name,
+                          maxQty: product.qty,
+                          image: product.thumbnail,
+                          coupon_id: null,
+                        })
+                      );
+                      setSelectedColor(null);
+                      setSelectedSize(null);
+                      setQty(1);
+                    }}
                     disabled={!selectedColor || !selectedSize || !qty}
                     className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 disabled:bg-gray-400 rounded"
                   >
