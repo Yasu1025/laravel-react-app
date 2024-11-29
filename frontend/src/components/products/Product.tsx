@@ -7,6 +7,7 @@ import AlertMessage from "../layouts/Alert";
 import Slider from "./images/Slider";
 import { addToCart } from "../../redux/store/slices/cartSlices";
 import { useAppDispatch } from "../../redux/store/hooks";
+import { makeUniqueId } from "../../utils";
 
 const Product = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -31,19 +32,6 @@ const Product = (): JSX.Element => {
     };
     fetchProductBySlug();
   }, [slug]);
-
-  const makeUniqueId = (length: number): string => {
-    let result = "";
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
-  };
 
   return (
     <div>
