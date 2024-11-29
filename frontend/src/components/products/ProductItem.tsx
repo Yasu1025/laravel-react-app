@@ -9,7 +9,7 @@ const ProductItem = ({ product }: Props): JSX.Element => {
   return (
     <div className="p-4 lg:w-1/3 md:w-1/2">
       <Link
-        to=""
+        to={`/product/${product.slug}`}
         className="h-full flex flex-col items-center hover:opacity-80"
       >
         <img

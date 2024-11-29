@@ -25,6 +25,9 @@ class ProductController extends Controller
   // Get the product by slug
   public function show(Product $product)
   {
+    if (!$product) {
+      abort(404);
+    }
     return ProductResource::make(
       $product->load(['colors', 'sizes', 'reviews'])
     );

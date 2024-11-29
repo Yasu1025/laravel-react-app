@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IColor, IProduct, ISize } from "../types";
 import apiClient from "../api/client";
 import ProductList from "./products/ProductList";
-import Alert from "./layouts/Alert";
+import AlertMessage from "./layouts/Alert";
 import Spinner from "./layouts/Spinner";
 
 const Home = (): JSX.Element => {
@@ -125,7 +125,7 @@ const Home = (): JSX.Element => {
       ) : products.length > 0 ? (
         <ProductList products={products} />
       ) : (
-        <Alert content="No Products...." />
+        <AlertMessage content="No Products...." />
       )}
     </div>
   );
