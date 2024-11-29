@@ -23,3 +23,22 @@ export interface ISize {
   id: number;
   name: string;
 }
+
+export interface ICoupon {
+  name: string;
+  discount: number;
+}
+
+export interface IProductItem {
+  product_id: string;
+  ref: string;
+  name: string;
+  slug: string;
+  qty: number;
+  price: number;
+  color: string; // name
+  size: string; // name
+  maxQty: number;
+  image: string;
+  coupon_id: string;
+}
