@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../redux/store/hooks";
+import AlertMessage from "../layouts/Alert";
 import CartItem from "./CartItem";
 import CartRight from "./CartRight";
 
@@ -9,9 +10,11 @@ const Cart = (): JSX.Element => {
       <div className="grid md:grid-cols-3 gap-4">
         <div className="md:col-span-2 bg-gray-100 p-4 rounded-md">
           <h2 className="text-2xl font-bold text-gray-800">Cart</h2>
-          {cartItems.map((ci) => (
-            <CartItem key={ci.ref} cartItem={ci} />
-          ))}
+          {cartItems.length ? (
+            cartItems.map((ci) => <CartItem key={ci.ref} cartItem={ci} />)
+          ) : (
+            <AlertMessage content="No items yet...." />
+          )}
         </div>
         <CartRight cartItems={cartItems} />
       </div>
